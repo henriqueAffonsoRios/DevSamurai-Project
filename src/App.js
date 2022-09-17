@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable react/no-unknown-property */
+import React, { useState } from 'react';
 
-function App() {
+import NewTodo from './components/NewTodo';
+import TodoList from './components/TodoList';
+
+const App = () => {
+  const [toDos, setToDos] = useState([]);
+
+  const onToggle = (toDo) => {
+    setToDos(
+      toDos.map((obj) =>
+        obj.id === toDo.id
+          ? {
+              ...obj,
+              checked: !toDo.checked
+            }
+          : obj
+      )
+    );
+  };
+  const remove = (toDo) => {
+    setToDos(toDos.filter((obj) => obj.id !== toDo.id));
+  };
+
+  const onNewTodo = (value) => {
+    setToDos([
+      ...toDos,
+      {
+        id: new Date().getTime(),
+        title: value,
+        checked: false
+      }
+    ]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <section className="container">
+      <header>
+        <h1 className="title">to-Do</h1>
       </header>
-    </div>
+      <section className="main">
+        <NewTodo onNewTodo={onNewTodo} />
+        <TodoList toDos={toDos} onToggle={onToggle} remove={remove} />
+      </section>
+    </section>
   );
-}
+};
 
 export default App;

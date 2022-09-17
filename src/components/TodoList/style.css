@@ -1,0 +1,28 @@
+.main {
+  width: 30%;
+}
+
+.toDo-list {
+  background-color: #fff;
+}
+
+.toDo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #dfe6e9;
+  cursor: pointer;
+}
+
+.toDo.checked {
+  color: #b2bec3;
+  text-decoration: line-through;
+}
+
+.remove-btn {
+  border: none;
+  color: #ff7675;
+  background-color: transparent;
+  cursor: pointer;
+}
